@@ -72,6 +72,35 @@
         nav a:hover{color:var(--gold);}
         nav a:hover::after{width:100%;}
 
+        /* LANGUE FR/EN */
+        .header-right{display:flex;align-items:center;gap:16px;}
+        .lang-switch{
+            display:flex;align-items:center;
+            border:1px solid rgba(200,168,75,0.35);
+            background:rgba(200,168,75,0.07);
+            border-radius:2px;overflow:hidden;
+            backdrop-filter:blur(8px);
+        }
+        .lang-opt{
+            appearance:none;border:none;background:transparent;cursor:pointer;
+            padding:8px 14px;
+            font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;
+            letter-spacing:2px;text-transform:uppercase;
+            color:rgba(255,255,255,0.5);
+            transition:all 0.3s ease;position:relative;
+        }
+        .lang-opt:hover{color:var(--gold-light);}
+        .lang-opt.active{
+            background:linear-gradient(135deg,var(--gold),var(--gold-light));
+            color:var(--deep);
+            box-shadow:0 4px 16px rgba(200,168,75,0.35);
+        }
+        .lang-sep{width:1px;height:16px;background:rgba(200,168,75,0.25);}
+        @media(max-width:640px){
+            .lang-opt{padding:7px 11px;font-size:9px;}
+            .header-right{gap:10px;}
+        }
+
         /* HERO */
         .hero{
             min-height:100vh;position:relative;overflow:hidden;
@@ -492,7 +521,7 @@
             transition: max-height 0.45s cubic-bezier(0.4,0,0.2,1), padding 0.35s;
             background: var(--deep); padding: 0 22px;
         }
-        .concours-card.open .concours-years-panel { max-height: 200px; padding: 18px 22px; }
+        .concours-card.open .concours-years-panel { max-height: 1400px; padding: 18px 22px; }
         .concours-year-row {
             display: flex; justify-content: space-between; align-items: center;
             padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -1183,9 +1212,16 @@
         <a href="#galerie">Galerie</a>
         <a href="#classes">Espace Élèves</a>
     </nav>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
-        <span></span><span></span><span></span>
-    </button>
+    <div class="header-right">
+        <div class="lang-switch" role="group" aria-label="Langue / Language">
+            <button class="lang-opt active" data-lang="fr" onclick="setLang('fr')">FR</button>
+            <span class="lang-sep"></span>
+            <button class="lang-opt" data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
 </header>
 
 <!-- MENU OVERLAY MOBILE -->
@@ -1445,9 +1481,86 @@
                             <span class="cy-label">2024 / 2025</span>
                             <span class="coming-soon-badge">À venir</span>
                         </div>
-                        <div class="concours-year-row next">
+                        <div class="concours-year-row next" style="flex-direction:column;align-items:flex-start;gap:10px;">
                             <span class="cy-label">2025 / 2026</span>
-                            <span class="coming-soon-badge">À venir</span>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-trophy" style="color:var(--deep);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Marie Madeleine Fatou Sagna</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Première · Physique</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;">1er prix</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-trophy" style="color:var(--deep);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Babacar Ndiaye</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Première · Arabe</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;">1er prix</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#8f9cae,#d7dee8);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-medal" style="color:#1a1a2e;font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Cheikhouna Diop</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Première · Arabe</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:#d7dee8;letter-spacing:1px;text-transform:uppercase;">2e prix</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#7c4a1e,#cd7f32);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-medal" style="color:#f5cba7;font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">El Hadji Mafally Thiam</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Première · Mathématiques</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:#cd7f32;letter-spacing:1px;text-transform:uppercase;">3e prix</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,75,0.14);border:1px solid rgba(200,168,75,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-award" style="color:var(--gold-light);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Baye Mbargou Lo</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Première · Anglais</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;">1er accessit</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,75,0.14);border:1px solid rgba(200,168,75,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-award" style="color:var(--gold-light);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">El Hadji Mafally Thiam</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Première · Anglais</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;">2e accessit</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1541,196 +1654,146 @@
                         </div>
                     </div>
                 </div>
-                <div class="concours-card" onclick="toggleConcours('')">
+                <div class="concours-card" onclick="toggleConcours('uasz')">
                     <div class="concours-card-inner">
-                        <div class="lcard-medal" style="background:linear-gradient(135deg,#bd5315,#c50821);margin:0 auto 14px;"><i class="fas fa-atom" style="color:#d8b4fe"></i></div>
-                        <div class="lcard-name">Olympiade UARZ</div>
-                        <div class="lcard-info">Olympiade Maths, Pc et SVT</div>
-                        <div class="concours-toggle-hint"><i class="fas fa-chevron-down" id="chevron-miss-science"></i> Voir les années</div>
+                        <div class="lcard-medal" style="background:linear-gradient(135deg,#bd5315,#c50821);margin:0 auto 14px;"><i class="fas fa-atom" style="color:#ffd9c2"></i></div>
+                        <div class="lcard-name">Olympiade UASZ</div>
+                        <div class="lcard-info">Olympiade Maths, PC et SVT</div>
+                        <div class="concours-toggle-hint"><i class="fas fa-chevron-down" id="chevron-uasz"></i> Voir les années</div>
                     </div>
-                    <div class="concours-years-panel" id="panel-miss-science">
-                        <div class="concours-year-row" style="flex-direction:column;align-items:flex-start;gap:10px;">
+                    <div class="concours-years-panel" id="panel-uasz">
+                        <div class="concours-year-row">
                             <span class="cy-label">2024 / 2025</span>
+                            <span class="cy-note">Aucun résultat enregistré</span>
+                        </div>
+                        <div class="concours-year-row next" style="flex-direction:column;align-items:flex-start;gap:10px;">
+                            <span class="cy-label">2025 / 2026</span>
                             <div style="display:flex;align-items:center;gap:12px;width:100%;">
-                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6b21a8,#9333ea);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                                    <i class="fas fa-crown" style="color:#d8b4fe;font-size:14px;"></i>
+                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-trophy" style="color:var(--deep);font-size:14px;"></i>
                                 </div>
                                 <div style="flex:1;">
-                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Marie Madeleine Fatou Sagna</div>
-                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Seconde · Maths · PC · SVT</div>
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Fallou Kasse</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Maths · PC</div>
                                 </div>
-                                
                                 <div style="text-align:right;flex-shrink:0;">
-                                    <div style="font-size:11px;font-weight:700;color:#d8b4fe;letter-spacing:1px;text-transform:uppercase;">1ère Dauphine</div>
-                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;">1er prix d'Excellence</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau interrégional</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,75,0.14);border:1px solid rgba(200,168,75,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-award" style="color:var(--gold-light);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Lena Diop</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Maths · PC</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;">1er prix d'honneur</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau interrégional</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,75,0.14);border:1px solid rgba(200,168,75,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-award" style="color:var(--gold-light);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Saliou Ndiaye</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Maths · PC</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;">2e prix d'honneur</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau interrégional</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,75,0.14);border:1px solid rgba(200,168,75,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-award" style="color:var(--gold-light);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Mouhammadou Moustapha Diop</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Maths · PC</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;">3e prix d'honneur</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau interrégional</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,75,0.14);border:1px solid rgba(200,168,75,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-award" style="color:var(--gold-light);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Moustapha Thiam</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Maths · PC</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;">4e prix d'honneur</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau interrégional</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,75,0.14);border:1px solid rgba(200,168,75,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-award" style="color:var(--gold-light);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Fatou Kiné Bousso</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Maths · PC</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;">5e prix d'honneur</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau interrégional</div>
+                                </div>
+                            </div>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:rgba(200,168,75,0.14);border:1px solid rgba(200,168,75,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-award" style="color:var(--gold-light);font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Baba Thiam</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Maths · PC</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold-light);letter-spacing:1px;text-transform:uppercase;">6e prix d'honneur</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau interrégional</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="concours-year-row next">
-                            <span class="cy-label">2025 / 2026</span>
-                            <span class="coming-soon-badge">À venir</span>
-                        </div>
                     </div>
                 </div>
-                <div class="concours-card" onclick="toggleConcours('')">
+                <div class="concours-card" onclick="toggleConcours('junior-polytech')">
                     <div class="concours-card-inner">
-                        <div class="lcard-medal" style="background:linear-gradient(135deg,#0a76cf,#0b08c5);margin:0 auto 14px;"><i class="fas fa-atom" style="color:#d8b4fe"></i></div>
-                        <div class="lcard-name">Junior polytech</div>
+                        <div class="lcard-medal" style="background:linear-gradient(135deg,#0a76cf,#0b08c5);margin:0 auto 14px;"><i class="fas fa-atom" style="color:#a8d4ff"></i></div>
+                        <div class="lcard-name">Junior Polytech</div>
                         <div class="lcard-info">Concours Maths et PC</div>
-                        <div class="concours-toggle-hint"><i class="fas fa-chevron-down" id="chevron-miss-science"></i> Voir les années</div>
+                        <div class="concours-toggle-hint"><i class="fas fa-chevron-down" id="chevron-junior-polytech"></i> Voir les années</div>
                     </div>
-                    <div class="concours-years-panel" id="panel-miss-science">
-                        <div class="concours-year-row" style="flex-direction:column;align-items:flex-start;gap:10px;">
+                    <div class="concours-years-panel" id="panel-junior-polytech">
+                        <div class="concours-year-row">
                             <span class="cy-label">2024 / 2025</span>
+                            <span class="cy-note">Aucun résultat enregistré</span>
+                        </div>
+                        <div class="concours-year-row next" style="flex-direction:column;align-items:flex-start;gap:10px;">
+                            <span class="cy-label">2025 / 2026</span>
                             <div style="display:flex;align-items:center;gap:12px;width:100%;">
-                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#212aa8,#9333ea);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                                    <i class="fas fa-crown" style="color:#d8b4fe;font-size:14px;"></i>
+                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-trophy" style="color:var(--deep);font-size:14px;"></i>
                                 </div>
                                 <div style="flex:1;">
-                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Marie Madeleine Fatou Sagna</div>
-                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Seconde · Maths · PC · SVT</div>
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">El Hadji Mafally Thiam</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Mathématiques</div>
                                 </div>
-                                
                                 <div style="text-align:right;flex-shrink:0;">
-                                    <div style="font-size:11px;font-weight:700;color:#d8b4fe;letter-spacing:1px;text-transform:uppercase;">1ère Dauphine</div>
+                                    <div style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;text-transform:uppercase;">1er prix</div>
                                     <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="concours-year-row next">
-                            <span class="cy-label">2025 / 2026</span>
-                            <span class="coming-soon-badge">À venir</span>
-                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Lauréats -->
-            <h3 class="palmares-laureat-title reveal" style="margin-top:60px;">
-                <i class="fas fa-star" style="color:var(--gold);font-size:20px;margin-right:12px;"></i>
-                Lauréats d'Honneur · 2024/2026
-            </h3>
-            <div class="laureat-grid reveal">
-                <div class="lcard">
-                   <div class="lcard-medal" style="background:linear-gradient(135deg,#178d2b,#21a833)"><i class="fas fa-crown" style="color:#63aa11"></i></div>
-                    <div class="lcard-name">El Hadji Mafally Thiam</div>
-                    <div class="lcard-info">Maths·junior polytech </div>
-                    <div class="lcard-score coming-soon-large">1er prix </div>
-                    <div class="lcard-mention">Niveau National·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal gold"><i class="fas fa-medal"></i></div>
-                    <div class="lcard-name">Marie Madeleine Fatou Sagna</div>
-                    <div class="lcard-info">Concours général · Physique</div>
-                    <div class="lcard-score coming-soon-large">1er prix</div>
-                    <div class="lcard-mention">Niveau national·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal gold"><i class="fas fa-award"></i></div>
-                    <div class="lcard-name">Babacar Ndiaye</div>
-                    <div class="lcard-info">Concours Général · Arabe</div>
-                    <div class="lcard-score coming-soon-large">1er prix</div>
-                    <div class="lcard-mention">Niveau national ·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal gold"><i class="fas fa-award"></i></div>
-                    <div class="lcard-name">Cheikhouna Diop</div>
-                    <div class="lcard-info">Concours Général · Arabe</div>
-                    <div class="lcard-score coming-soon-large">2e prix</div>
-                    <div class="lcard-mention">Niveau national·2025/2026</div>
-                </div>
-                 <div class="lcard">
-                    <div class="lcard-medal bronze"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">El Hadji Mafally Thiam</div>
-                    <div class="lcard-info">Concours général·Maths </div>
-                    <div class="lcard-score coming-soon-large">3e prix </div>
-                    <div class="lcard-mention">Niveau National·2025/2026</div>
-                </div>
-                 <div class="lcard">
-                    <div class="lcard-medal silver"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">Baye mbargou Lo</div>
-                    <div class="lcard-info">Concours général·Anglais </div>
-                    <div class="lcard-score coming-soon-large">1er accessit </div>
-                    <div class="lcard-mention">Niveau National·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal silver"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">El hadji Mafally Thiam</div>
-                    <div class="lcard-info">Concours général·Anglais </div>
-                    <div class="lcard-score coming-soon-large">2e accessit </div>
-                    <div class="lcard-mention">Niveau National·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal" style="background:linear-gradient(135deg,#7c4a1e,#cd7f32)"><i class="fas fa-medal" style="color:#f5cba7"></i></div>
-                    <div class="lcard-name">El Hadji Mafally Thiam</div>
-                    <div class="lcard-info">Olympiades Francophones · Maths · Première</div>
-                    <div class="lcard-score" style="background:rgba(205,127,50,0.12);border:1px solid rgba(205,127,50,0.35);color:#cd7f32;font-size:11px;letter-spacing:1.5px;padding:8px 16px;border-radius:4px;text-transform:uppercase;font-weight:700;">Médaille Bronze</div>
-                    <div class="lcard-mention" style="color:#cd7f32;">Niveau international · 2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal" style="background:linear-gradient(135deg,#0d3320,#155724)"><i class="fas fa-trophy" style="color:#6ee7a0"></i></div>
-                    <div class="lcard-name">Omar Ryan Beye</div>
-                    <div class="lcard-info">Olympiade Nationale · Maths · 5ème</div>
-                    <div class="lcard-score" style="background:rgba(110,231,160,0.1);border:1px solid rgba(110,231,160,0.3);color:#6ee7a0;font-size:11px;letter-spacing:1.5px;padding:8px 16px;border-radius:4px;text-transform:uppercase;font-weight:700;">1er Prix National</div>
-                    <div class="lcard-mention" style="color:#6ee7a0;">1er du Sénégal · 2024/2025</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal" style="background:linear-gradient(135deg,#3d1472,#6b21a8)"><i class="fas fa-crown" style="color:#d8b4fe"></i></div>
-                    <div class="lcard-name">Marie Madeleine Fatou Sagna</div>
-                    <div class="lcard-info">Miss Science · Maths · PC · SVT · Seconde</div>
-                    <div class="lcard-score" style="background:rgba(216,180,254,0.1);border:1px solid rgba(216,180,254,0.3);color:#d8b4fe;font-size:11px;letter-spacing:1.5px;padding:8px 16px;border-radius:4px;text-transform:uppercase;font-weight:700;">1ère Dauphine</div>
-                    <div class="lcard-mention" style="color:#d8b4fe;">Niveau national · 2024/2025</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal gold"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">Fallou Kasse</div>
-                    <div class="lcard-info">Olympiade UASZ·Maths·PC </div>
-                    <div class="lcard-score coming-soon-large">1er prix d'Excellence</div>
-                    <div class="lcard-mention">Niveau interregional·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal bronze"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">Lena Diop</div>
-                    <div class="lcard-info">Olympiade UASZ·Maths·PC </div>
-                    <div class="lcard-score coming-soon-large">1er prix d'honneur</div>
-                    <div class="lcard-mention">Niveau interregional·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal silver"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">Saliou Ndiaye</div>
-                    <div class="lcard-info">Olympiade UASZ·Maths·PC </div>
-                    <div class="lcard-score coming-soon-large">2e prix d'honneur</div>
-                    <div class="lcard-mention">Niveau interregional·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal silver"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">Mouhammadou Moustpha Diop</div>
-                    <div class="lcard-info">Olympiade UASZ·Maths·PC </div>
-                    <div class="lcard-score coming-soon-large">3e prix d'honneur</div>
-                    <div class="lcard-mention">Niveau interregional·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal silver"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">Moustapha Thiam</div>
-                    <div class="lcard-info">Olympiade UASZ·Maths·PC </div>
-                    <div class="lcard-score coming-soon-large">4e prix d'honneur</div>
-                    <div class="lcard-mention">Niveau interregional·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal silver"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">Fatou kiné Bousso</div>
-                    <div class="lcard-info">Olympiade UASZ·Maths·PC </div>
-                    <div class="lcard-score coming-soon-large">5e prix d'honneur</div>
-                    <div class="lcard-mention">Niveau interregional·2025/2026</div>
-                </div>
-                <div class="lcard">
-                    <div class="lcard-medal silver"><i class="fas fa-trophy"></i></div>
-                    <div class="lcard-name">Baba Thiam</div>
-                    <div class="lcard-info">Olympiade UASZ·Maths·PC </div>
-                    <div class="lcard-score coming-soon-large">6e prix d'honneur</div>
-                    <div class="lcard-mention">Niveau interregional·2025/2026</div>
-                </div>
-            </div>
-        </div>
+</div>
     </div>
 </section>
 
@@ -2496,6 +2559,369 @@
         el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
         cardObs.observe(el);
     });
+</script>
+<script>
+// ══════════════════════════════════════════════════════════════════
+//  SYSTÈME BILINGUE FR / EN — LYNAQE
+//  Le français est la langue par défaut (contenu du HTML).
+//  Pour ajouter/modifier une traduction : "Texte français": "English text"
+//  (les clés sont comparées après normalisation des espaces)
+// ══════════════════════════════════════════════════════════════════
+const I18N_EN = {
+    // ── Navigation ──
+    "Accueil": "Home",
+    "Citations": "Quotes",
+    "Présentation": "Presentation",
+    "Palmarès": "Achievements",
+    "Encadrement": "Leadership",
+    "Galerie": "Gallery",
+    "Espace Élèves": "Student Area",
+    "Excellence Éducative": "Educational Excellence",
+
+    // ── Hero ──
+    "🇸🇳 Un Peuple · Un But · Une Foi": "🇸🇳 One People · One Goal · One Faith",
+    "L'Excellence": "Excellence",
+    "au Cœur de": "at the Heart of",
+    "Notre Mission": "Our Mission",
+    "Plateforme numérique officielle du LYNAQE de": "Official digital platform of LYNAQE",
+    "Sédhiou — un espace dédié à l'apprentissage, la rigueur et l'excellence académique.": "Sédhiou — a space dedicated to learning, rigor and academic excellence.",
+    "Nos Classes 2025": "Our Classes 2025",
+    "Établissements": "Schools",
+    "Matières": "Subjects",
+    "Niveaux": "Levels",
+
+    // ── Vision ──
+    "Chapitre I": "Chapter I",
+    "La Vision LYNAQE": "The LYNAQE Vision",
+    "Un Lycée d'Excellence forgé": "A School of Excellence forged",
+    "pour le Sénégal de": "for the Senegal of",
+    "demain": "tomorrow",
+    "Olympiade UASZ": "UASZ Olympiad",
+    "Première · Physique": "11th grade · Physics",
+    "Première · Arabe": "11th grade · Arabic",
+    "Première · Anglais": "11th grade · English",
+    "Niveau interrégional": "Interregional level",
+    "Olympiade Maths, PC et SVT": "Maths, Physics & Biology Olympiad",
+    "Aucun résultat enregistré": "No results recorded",
+    "Maths · PC": "Maths · Physics",
+    "est un établissement public d'excellence à régime d'internat, fruit d'une collaboration entre le Ministère de l'Éducation nationale et le Ministère des Forces armées. Inspiré de l'expérience du": "is a public boarding school of excellence, born of a collaboration between the Ministry of National Education and the Ministry of the Armed Forces. Inspired by the experience of the",
+    "et inscrit dans l'": "and part of the ",
+    "Agenda national Sénégal 2050": "Senegal 2050 National Agenda",
+    ", il forme une nouvelle génération d'élèves tournée vers les Sciences, Technologies, Ingénierie et Mathématiques.": ", it trains a new generation of students focused on Science, Technology, Engineering and Mathematics.",
+    "L'Excellence n'est pas un don. C'est une discipline forgée par la rigueur, l'équité et la quête perpétuelle du savoir.": "Excellence is not a gift. It is a discipline forged through rigor, equity and the perpetual pursuit of knowledge.",
+    "Décret portant création des LYNAQE · République du Sénégal": "Decree establishing the LYNAQE schools · Republic of Senegal",
+    "Apprentissage Innovant": "Innovative Learning",
+    "Un cadre dédié à l'expérimentation, la créativité et la maîtrise des Sciences, Technologies, Ingénierie et Mathématiques (STEM).": "A setting dedicated to experimentation, creativity and mastery of Science, Technology, Engineering and Mathematics (STEM).",
+    "Équité Sociale & Territoriale": "Social & Territorial Equity",
+    "Une sélection sur concours par circonscription académique, garantissant l'égalité des chances pour les élèves de tous horizons.": "Selection through a competitive exam by academic district, guaranteeing equal opportunity for students from all backgrounds.",
+    "Rigueur d'Inspiration Militaire": "Military-Inspired Rigor",
+    "Un encadrement civique et moral renforcé, fondé sur la discipline et l'imprégnation de nos valeurs nationales.": "Strengthened civic and moral guidance, founded on discipline and the instilling of our national values.",
+
+    // ── Citations ──
+    "Sagesse & Lumière": "Wisdom & Light",
+    "Des Mots qui Élèvent l'Âme": "Words that Elevate the Soul",
+    "Héritage spirituel et philosophique de l'Afrique": "Africa's spiritual and philosophical heritage",
+    "Wolof · Citation Spirituelle": "Wolof · Spiritual Quote",
+    "« Celui qui possède la vraie connaissance ne voit en elle qu'un chemin vers Dieu. »": "« He who possesses true knowledge sees in it only a path to God. »",
+    "Fondateur du Mouridisme · Sénégal": "Founder of Mouridism · Senegal",
+    "« Le savoir a de la valeur, mais sans humilité et bénédiction divine, il n'est que paroles vaines. »": "« Knowledge has value, but without humility and divine blessing, it is nothing but empty words. »",
+    "Guide Spirituel Tijane · Sénégal": "Tijani Spiritual Guide · Senegal",
+    "« L'éducation est l'arme la plus puissante que vous puissiez utiliser pour changer le monde. »": "« Education is the most powerful weapon you can use to change the world. »",
+    "Père de la Nation · Afrique du Sud": "Father of the Nation · South Africa",
+    "« La connaissance est une lumière, son éclat appartient à celui qui l'entretient dans le service. »": "« Knowledge is a light; its brilliance belongs to the one who tends it in service. »",
+    "Philosophe & Historien · Sénégal": "Philosopher & Historian · Senegal",
+    "« Osez inventer l'avenir. Il n'y a pas de miracle, seulement le courage de bâtir ce qui n'existe pas encore. »": "« Dare to invent the future. There are no miracles, only the courage to build what does not yet exist. »",
+    "Père de la Révolution · Burkina Faso": "Father of the Revolution · Burkina Faso",
+    "« Un enfant qui n'est pas embrassé par son village le brûlera pour sentir sa chaleur. »": "« The child who is not embraced by the village will burn it down to feel its warmth. »",
+    "Sagesse Ancestrale Africaine": "Ancestral African Wisdom",
+
+    // ── Présentation / Classes en images ──
+    "Portraits 2025": "Portraits 2025",
+    "Nos Classes en Images": "Our Classes in Pictures",
+    "Venez découvrir les promotions de l'année": "Come discover this year's cohorts",
+    "Promotion 2025 — LYNAQE Sédhiou": "Class of 2025 — LYNAQE Sédhiou",
+    "Collège": "Middle School",
+    "Lycée": "High School",
+
+    // ── Palmarès ──
+    "Excellence & Mérite": "Excellence & Merit",
+    "Palmarès Académique": "Academic Achievements",
+    "Première année scolaire 2024/2025 — les résultats arrivent bientôt": "First school year 2024/2025 — results coming soon",
+    "Examens Officiels": "Official Exams",
+    "Examen national · Terminale": "National exam · Final year",
+    "Voir les années": "See the years",
+    "Année en cours — pas encore en Terminale": "Current year — not yet in final year",
+    "À venir": "Coming soon",
+    "Brevet de Fin d'Études Moyennes": "Middle School Completion Exam",
+    "Année en cours — pas encore en 3ème": "Current year — not yet in 9th grade",
+    "Compétitions & Concours": "Competitions & Contests",
+    "Excellence académique nationale": "National academic excellence",
+    "Olympiade Nationale": "National Olympiad",
+    "Compétition nationale sénégalaise": "Senegalese national competition",
+    "5ème · Mathématiques": "7th grade · Mathematics",
+    "1er Prix": "1st Prize",
+    "1er du Sénégal": "1st in Senegal",
+    "Olympiades Francophones": "Francophone Olympiads",
+    "Compétition internationale": "International competition",
+    "Première · Mathématiques": "11th grade · Mathematics",
+    "Médaille Bronze": "Bronze Medal",
+    "Niveau international": "International level",
+    "Concours scientifique féminin": "Women's science competition",
+    "Seconde · Maths · PC · SVT": "10th grade · Maths · Physics · Biology",
+    "1ère Dauphine": "1st Runner-up",
+    "Niveau national": "National level",
+    "Concours Maths et PC": "Maths & Physics competition",
+    "1er prix": "1st Prize",
+    "2e prix": "2nd Prize",
+    "3e prix": "3rd Prize",
+    "1er accessit": "1st Honorable Mention",
+    "2e accessit": "2nd Honorable Mention",
+    "1er prix d'Excellence": "1st Prize of Excellence",
+    "1er prix d'honneur": "1st Honor Prize",
+    "2e prix d'honneur": "2nd Honor Prize",
+    "3e prix d'honneur": "3rd Honor Prize",
+    "4e prix d'honneur": "4th Honor Prize",
+    "5e prix d'honneur": "5th Honor Prize",
+    "6e prix d'honneur": "6th Honor Prize",
+
+    // ── Encadrement ──
+    "Organisation & Hiérarchie": "Organization & Hierarchy",
+    "Notre Encadrement": "Our Leadership",
+    "Une structure duale — rigueur académique et discipline militaire au service de l'excellence": "A dual structure — academic rigor and military discipline in the service of excellence",
+    "Direction Suprême": "Supreme Command",
+    "Commandement": "Command",
+    "Colonel · Commandant": "Colonel · Commander",
+    "LYNAQE — dirige l'ensemble du corps académique et militaire": "LYNAQE — leads the entire academic and military corps",
+    "Pôles d'Encadrement": "Leadership Poles",
+    "Académique": "Academic",
+    "Directeur des Études": "Director of Studies",
+    "Pilote l'ensemble du corps enseignant et la vie académique de l'établissement": "Leads the entire teaching staff and the school's academic life",
+    "Militaire": "Military",
+    "Capitaine": "Captain",
+    "Adjoint au Commandant d'Établissement": "Deputy to the School Commander",
+    "Corps Académique": "Academic Corps",
+    "Surveillance & Administration": "Supervision & Administration",
+    "Surveillant Général": "General Supervisor",
+    "Surveillant 1er Cycle": "1st Cycle Supervisor",
+    "Surveillant 2nd Cycle": "2nd Cycle Supervisor",
+    "Référent Numérique": "Digital Coordinator",
+    "Bibliothécaire": "Librarian",
+    "Surveillant": "Supervisor",
+    "Corps Professoral — 22 Enseignants": "Teaching Staff — 22 Teachers",
+    "Mathématiques": "Mathematics",
+    "Physique-Chimie": "Physics & Chemistry",
+    "SVT": "Biology & Geology",
+    "Lettres Modernes": "Modern Literature",
+    "Français": "French",
+    "À renseigner": "To be announced",
+    "Anglais": "English",
+    "Langue Anglaise (LA)": "English Language (LA)",
+    "Espagnol": "Spanish",
+    "Histoire-Géographie": "History & Geography",
+    "Arabe": "Arabic",
+    "EPS": "Physical Education",
+    "Maths & Sciences Physiques": "Maths & Physical Sciences",
+    "Langue Espagnole (LE)": "Spanish Language (LE)",
+    "Corps Militaire & Sécurité": "Military & Security Corps",
+    "Intendance & Supervision": "Logistics & Supervision",
+    "Intendant": "Quartermaster",
+    "Surveillant d'Internat": "Boarding Supervisor",
+    "Commandants de Brigade": "Brigade Commanders",
+    "Commandant de Brigade — 1er Cycle": "Brigade Commander — 1st Cycle",
+    "Commandant de Brigade — 2nd Cycle": "Brigade Commander — 2nd Cycle",
+    "Chefs de Classe — Garçons": "Class Leaders — Boys",
+    "Chefs de Classe — Filles": "Class Leaders — Girls",
+    "Gendarme": "Gendarme",
+
+    // ── Galerie ──
+    "Vie Scolaire": "School Life",
+    "Galerie LYNAQE": "LYNAQE Gallery",
+    "Les moments qui font la richesse de notre communauté éducative": "The moments that enrich our educational community",
+    "Tout voir": "See all",
+    "🤝 Solidarité & Dons": "🤝 Solidarity & Giving",
+    "✦ Aperçu LYNAQE": "✦ LYNAQE Glimpse",
+    "Remises de Prix": "Award Ceremonies",
+    "Sport": "Sports",
+    "Culture": "Culture",
+    "Quand le soleil dit bonsoir au LYNAQE": "When the sun says goodnight to LYNAQE",
+    "Entre les dortoirs · Coucher de soleil": "Between the dorms · Sunset",
+    "Le savoir a une adresse": "Knowledge has an address",
+    "Bloc pédagogique · LYNAQE": "Teaching block · LYNAQE",
+    "Attention les yeux !": "Feast your eyes!",
+    "Un instant de vie · Campus LYNAQE": "A moment of life · LYNAQE Campus",
+    "Bougeons, allez !": "Let's move, come on!",
+    "En mouvement · Campus LYNAQE": "In motion · LYNAQE Campus",
+    "Ce n'est pas l'IA": "This is not AI",
+    "Bien réel · LYNAQE 2024/2025": "Very real · LYNAQE 2024/2025",
+    "Le LYNAQE ne dort jamais": "LYNAQE never sleeps",
+    "Vue nocturne du campus · 2024/2025": "Night view of the campus · 2024/2025",
+    "On apprend aussi la tendresse": "We also learn tenderness",
+    "Action sociale · LYNAQE Kaffrine 2024/2025": "Social action · LYNAQE Kaffrine 2024/2025",
+    "Donner, c'est aussi ça l'excellence": "Giving is also excellence",
+    "Dons communautaires · LYNAQE Kaffrine 2025": "Community donations · LYNAQE Kaffrine 2025",
+    "Quand les écrans s'allument pour de vrai": "When the screens light up for real",
+    "Remise d'ordinateurs par FORCE N · Sédhiou 2025": "Computer donation by FORCE N · Sédhiou 2025",
+    "Deux lycées, un seul esprit": "Two schools, one spirit",
+    "Rencontre des Présidents du GOSCO · Sédhiou – Kaffrine · 2026": "Meeting of GOSCO Presidents · Sédhiou – Kaffrine · 2026",
+    "La gratitude a un visage": "Gratitude has a face",
+    "Diplôme de Reconnaissance · LYNAQE Sédhiou 2025": "Certificate of Appreciation · LYNAQE Sédhiou 2025",
+    "Une poignée de main qui vaut de l'or": "A handshake worth gold",
+    "Les parents dans leurs œuvres": "Parents at their best",
+    "Cérémonie de remise · LYNAQE Kaffrine 2025": "Award ceremony · LYNAQE Kaffrine 2025",
+    "LYNAQE, bien représenté au podium national !": "LYNAQE, well represented on the national podium!",
+    "Miss Sciences Nationale 2025 · 1ère Dauphine LYNAQE Sédhiou": "National Miss Science 2025 · 1st Runner-up LYNAQE Sédhiou",
+    "L'éducation, c'est aussi s'amuser": "Education is also about having fun",
+    "Terrain de sport · LYNAQE 2024/2025": "Sports field · LYNAQE 2024/2025",
+    "Kaffrine vs Sédhiou — que le meilleur gagne !": "Kaffrine vs Sédhiou — may the best win!",
+    "Tournoi Interclasse · Match fratricide 2025": "Interclass Tournament · Sibling rivalry match 2025",
+    "Les Lionnes du LYNAQE": "The LYNAQE Lionesses",
+    "Équipe féminine · Tournoi Interclasse 2025": "Women's team · Interclass Tournament 2025",
+    "Les Lions sont prêts !": "The Lions are ready!",
+    "Équipe masculine · Tournoi Interclasse 2025": "Men's team · Interclass Tournament 2025",
+    "Les Peuls du LYNAQE à l'honneur": "LYNAQE's Fulani in the spotlight",
+    "Soirée culturelle · LYNAQE 2024/2025": "Cultural evening · LYNAQE 2024/2025",
+    "Ouf… quelle diversité culturelle !": "Wow… what cultural diversity!",
+    "Représentation des ethnies · LYNAQE 2024/2025": "Representation of ethnic groups · LYNAQE 2024/2025",
+    "Et bien sûr, on est propre !": "And of course, we keep it clean!",
+    "Journée de nettoyage · LYNAQE 2024/2025": "Cleaning day · LYNAQE 2024/2025",
+    "Même au micro, elle assure !": "Even on the mic, she shines!",
+    "Leçon de vie · LYNAQE 2024/2025": "Life lesson · LYNAQE 2024/2025",
+    "La pratique, c'est aussi le savoir": "Practice is also knowledge",
+    "Exposé scientifique · LYNAQE 2024/2025": "Science presentation · LYNAQE 2024/2025",
+    "Elles veillent, et avec le sourire": "They keep watch, with a smile",
+    "Corps féminin de la Gendarmerie · LYNAQE 2025": "Women's Gendarmerie corps · LYNAQE 2025",
+    "Le public ? Ça me fait pas peur !": "An audience? I'm not afraid!",
+    "Prise de parole · LYNAQE Sédhiou 2025": "Public speaking · LYNAQE Sédhiou 2025",
+
+    // ── Espace Élèves ──
+    "Ressources Pédagogiques": "Learning Resources",
+    "Espace Numérique d'Apprentissage": "Digital Learning Space",
+    "Choisissez votre niveau — toutes les matières vous attendent": "Choose your level — every subject awaits you",
+    "Niveau": "Level",
+    "Sélectionnez une matière pour accéder aux ressources": "Select a subject to access resources",
+    "Accéder →": "Access →",
+    "Bientôt": "Coming soon",
+
+    // ── Footer ──
+    "Région de Sédhiou, Sénégal": "Sédhiou Region, Senegal",
+    "Contact": "Contact",
+    "Administration": "Administration",
+    "Officiel. Tous droits réservés.": "Official. All rights reserved.",
+    "Conçu avec passion par": "Designed with passion by",
+    "Suivez-nous sur les réseaux sociaux": "Follow us on social media"
+};
+
+// Traductions d'attributs : [sélecteur, attribut, FR, EN]
+const I18N_ATTR = [
+    ['.wa-float', 'title', "Contacter l'administration", "Contact the administration"]
+];
+
+const I18N_TITLES = {
+    fr: "LYNAQE — Excellence Éducative",
+    en: "LYNAQE — Educational Excellence"
+};
+
+let currentLang = 'fr';
+
+function _i18nNorm(s) {
+    return s.replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim();
+}
+
+// Traduit un nœud (et ses descendants) vers l'anglais
+function _translateToEN(node) {
+    if (node.nodeType === 3) { // nœud texte
+        const original = node.__fr !== undefined ? node.__fr : node.nodeValue;
+        const key = _i18nNorm(original);
+        if (key && Object.prototype.hasOwnProperty.call(I18N_EN, key)) {
+            const en = I18N_EN[key];
+            if (en !== key) {
+                if (node.__fr === undefined) node.__fr = node.nodeValue;
+                const lead = original.match(/^\s*/)[0];
+                const trail = original.match(/\s*$/)[0];
+                const next = lead + en + trail;
+                if (node.nodeValue !== next) node.nodeValue = next;
+            }
+        }
+        return;
+    }
+    if (node.nodeType !== 1) return;
+    const tag = node.tagName;
+    if (tag === 'SCRIPT' || tag === 'STYLE') return;
+    for (const child of node.childNodes) _translateToEN(child);
+}
+
+// Restaure le français d'origine
+function _restoreFR() {
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let n;
+    while ((n = walker.nextNode())) {
+        if (n.__fr !== undefined) {
+            n.nodeValue = n.__fr;
+            delete n.__fr;
+        }
+    }
+}
+
+// Lettrine de la section Vision : "L" + "e Lycée…" ⇄ "T" + "he Lycée…"
+function _applyDropcap(lang) {
+    const dc = document.querySelector('.vision-dropcap');
+    const p = document.querySelector('.vision-paragraph');
+    if (!dc || !p) return;
+    dc.textContent = (lang === 'en') ? 'T' : 'L';
+    const node = p.firstChild;
+    if (node && node.nodeType === 3) {
+        if (lang === 'en') {
+            if (node.__fr === undefined) node.__fr = node.nodeValue;
+            node.nodeValue = node.__fr.replace(/e(\s*)$/, 'he$1');
+        }
+        // Le retour au français est géré par _restoreFR() via node.__fr
+    }
+}
+
+function _applyAttrs(lang) {
+    I18N_ATTR.forEach(([sel, attr, fr, en]) => {
+        document.querySelectorAll(sel).forEach(el => el.setAttribute(attr, lang === 'en' ? en : fr));
+    });
+}
+
+function setLang(lang) {
+    if (lang === currentLang) return;
+    currentLang = lang;
+    document.documentElement.setAttribute('lang', lang);
+    document.title = I18N_TITLES[lang];
+    if (lang === 'en') {
+        _translateToEN(document.body);
+    } else {
+        _restoreFR();
+    }
+    _applyDropcap(lang);
+    _applyAttrs(lang);
+    document.querySelectorAll('.lang-opt').forEach(b =>
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang)
+    );
+    try { localStorage.setItem('lynaqe-lang', lang); } catch (e) {}
+}
+
+// Traduit automatiquement le contenu généré dynamiquement
+// (Espace Élèves, lightbox…) quand l'anglais est actif
+const _i18nObserver = new MutationObserver(muts => {
+    if (currentLang !== 'en') return;
+    muts.forEach(m => {
+        if (m.type === 'childList') {
+            m.addedNodes.forEach(n => _translateToEN(n));
+        } else if (m.type === 'characterData') {
+            const t = m.target;
+            if (t.__fr === undefined) _translateToEN(t);
+        }
+    });
+});
+_i18nObserver.observe(document.body, { childList: true, subtree: true, characterData: true });
+
+// Restaurer la langue choisie lors de la dernière visite
+try {
+    const saved = localStorage.getItem('lynaqe-lang');
+    if (saved === 'en') setLang('en');
+} catch (e) {}
 </script>
 </body>
 </html>
