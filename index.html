@@ -73,9 +73,9 @@
         nav a:hover::after{width:100%;}
 
         /* LANGUE FR/EN */
-        .header-right{display:flex;align-items:center;gap:16px;}
+        .header-right{display:flex;align-items:center;gap:16px;flex-shrink:0;}
         .lang-switch{
-            display:flex;align-items:center;
+            display:flex;align-items:center;flex-shrink:0;
             border:1px solid rgba(200,168,75,0.35);
             background:rgba(200,168,75,0.07);
             border-radius:2px;overflow:hidden;
@@ -83,7 +83,7 @@
         }
         .lang-opt{
             appearance:none;border:none;background:transparent;cursor:pointer;
-            padding:8px 14px;
+            padding:8px 14px;white-space:nowrap;
             font-family:'DM Sans',sans-serif;font-size:10px;font-weight:700;
             letter-spacing:2px;text-transform:uppercase;
             color:rgba(255,255,255,0.5);
@@ -95,7 +95,18 @@
             color:var(--deep);
             box-shadow:0 4px 16px rgba(200,168,75,0.35);
         }
-        .lang-sep{width:1px;height:16px;background:rgba(200,168,75,0.25);}
+        .lang-sep{width:1px;height:16px;background:rgba(200,168,75,0.25);flex-shrink:0;}
+        /* Laptop étroit / tablette paysage : on resserre la nav pour tout faire tenir */
+        @media(max-width:1300px){
+            header{padding:16px 4%;}
+            nav{gap:20px;}
+            nav a{font-size:10px;letter-spacing:1.5px;}
+        }
+        /* Tablette : la nav à 7 liens ne tient plus avec le bouton langue → menu hamburger */
+        @media(max-width:1100px){
+            nav{display:none;}
+            .hamburger{display:flex;}
+        }
         @media(max-width:640px){
             .lang-opt{padding:7px 11px;font-size:9px;}
             .header-right{gap:10px;}
@@ -1654,6 +1665,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="concours-card" onclick="toggleConcours('miss-maths')">
+                    <div class="concours-card-inner">
+                        <div class="lcard-medal" style="background:linear-gradient(135deg,#7a1235,#c2185b);margin:0 auto 14px;"><i class="fas fa-crown" style="color:#ffc1d8"></i></div>
+                        <div class="lcard-name">Miss Maths</div>
+                        <div class="lcard-info">Concours mathématique féminin</div>
+                        <div class="concours-toggle-hint"><i class="fas fa-chevron-down" id="chevron-miss-maths"></i> Voir les années</div>
+                    </div>
+                    <div class="concours-years-panel" id="panel-miss-maths">
+                        <div class="concours-year-row">
+                            <span class="cy-label">2024 / 2025</span>
+                            <span class="cy-note">Aucun résultat enregistré</span>
+                        </div>
+                        <div class="concours-year-row next" style="flex-direction:column;align-items:flex-start;gap:10px;">
+                            <span class="cy-label">2025 / 2026</span>
+                            <div style="display:flex;align-items:center;gap:12px;width:100%;">
+                                <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#c2185b,#f06292);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                    <i class="fas fa-crown" style="color:#ffe0eb;font-size:14px;"></i>
+                                </div>
+                                <div style="flex:1;">
+                                    <div style="font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;">Aïcha Aidara</div>
+                                    <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">4ème · Mathématiques</div>
+                                </div>
+                                <div style="text-align:right;flex-shrink:0;">
+                                    <div style="font-size:11px;font-weight:700;color:#f8a5c2;letter-spacing:1px;text-transform:uppercase;">Miss Maths</div>
+                                    <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px;">Niveau national</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="concours-card" onclick="toggleConcours('uasz')">
                     <div class="concours-card-inner">
                         <div class="lcard-medal" style="background:linear-gradient(135deg,#bd5315,#c50821);margin:0 auto 14px;"><i class="fas fa-atom" style="color:#ffd9c2"></i></div>
@@ -2597,6 +2638,8 @@ const I18N_EN = {
     "pour le Sénégal de": "for the Senegal of",
     "demain": "tomorrow",
     "Olympiade UASZ": "UASZ Olympiad",
+    "Concours mathématique féminin": "Girls' mathematics competition",
+    "4ème · Mathématiques": "8th grade · Mathematics",
     "Première · Physique": "11th grade · Physics",
     "Première · Arabe": "11th grade · Arabic",
     "Première · Anglais": "11th grade · English",
