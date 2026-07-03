@@ -1266,6 +1266,28 @@
             .motcol-photo-wrap{max-width:280px;margin:0 auto;}
             #mot-colonel{padding:70px 6%;}
         }
+        /* ═══ SÉLECTEUR D'ANNÉE (Nos Classes) ═══ */
+        .year-switch{
+            display:inline-flex;align-items:center;margin-top:22px;
+            border:1px solid rgba(200,168,75,0.4);
+            background:rgba(13,36,72,0.04);
+            border-radius:2px;overflow:hidden;
+        }
+        .year-opt{
+            appearance:none;border:none;background:transparent;cursor:pointer;
+            padding:9px 22px;white-space:nowrap;
+            font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
+            letter-spacing:2px;
+            color:var(--muted);
+            transition:all 0.3s ease;
+        }
+        .year-opt:hover{color:var(--gold);}
+        .year-opt.active{
+            background:linear-gradient(135deg,var(--gold),var(--gold-light));
+            color:var(--deep);
+            box-shadow:0 4px 16px rgba(200,168,75,0.35);
+        }
+        .year-sep{width:1px;height:18px;background:rgba(200,168,75,0.3);}
     </style>
 </head>
 <body>
@@ -1483,6 +1505,11 @@
             <div class="sec-tag">Portraits 2025</div>
             <h2 class="sec-title">Nos Classes en Images</h2>
             <p class="sec-sub">Venez découvrir les promotions de l'année</p>
+            <div class="year-switch" role="group" aria-label="Année scolaire">
+                <button class="year-opt" data-year="2025" onclick="setPromoYear('2025')">2025</button>
+                <span class="year-sep"></span>
+                <button class="year-opt active" data-year="2026" onclick="setPromoYear('2026')">2026</button>
+            </div>
         </div>
         <div class="tabs-shell">
             <div class="tabs-track">
@@ -1491,8 +1518,24 @@
         </div>
         </div>
         <div id="sedhiou" class="lignage-content active">
-            <div class="promo-banner"><div class="promo-line"></div><div class="promo-text">Promotion 2025 — LYNAQE Sédhiou</div><div class="promo-line right"></div></div>
-            <div class="photo-grid">
+            <div class="promo-banner"><div class="promo-line"></div><div class="promo-text" id="promoText">Promotion 2026 — LYNAQE Sédhiou</div><div class="promo-line right"></div></div>
+            <div class="photo-grid" id="grid-2026">
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-6e-a.webp" alt="6ème A" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">6ème A</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-6e-b.webp" alt="6ème B" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">6ème B</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-5e-a.webp" alt="5ème A" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">5ème A</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-5e-b.webp" alt="5ème B" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">5ème B</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-4e-a.webp" alt="4ème A" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">4ème A</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:linear-gradient(135deg,#0d2448,#06101f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;"><i class="fas fa-camera" style="font-size:30px;color:rgba(200,168,75,0.5);"></i><span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,0.8);">Photo à venir</span></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">4ème B</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-2nd-s01.webp" alt="Seconde S01" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Lycée</div><div class="pcard-title">Seconde S01</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-2nd-s02.webp" alt="Seconde S02" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Lycée</div><div class="pcard-title">Seconde S02</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-2nd-s03.webp" alt="Seconde S03" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Lycée</div><div class="pcard-title">Seconde S03</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-2nd-s04.webp" alt="Seconde S04" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Lycée</div><div class="pcard-title">Seconde S04</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-1s1-a.webp" alt="Première S1 A" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Lycée</div><div class="pcard-title">Première S1 A</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:linear-gradient(135deg,#0d2448,#06101f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;"><i class="fas fa-camera" style="font-size:30px;color:rgba(200,168,75,0.5);"></i><span style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(200,168,75,0.8);">Photo à venir</span></div><div class="pcard-body"><div class="pcard-level">Lycée</div><div class="pcard-title">Première S1 B</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-1s2-a.webp" alt="Première S2 A" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Lycée</div><div class="pcard-title">Première S2 A</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+                <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/2026-1s2-b.webp" alt="Première S2 B" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Lycée</div><div class="pcard-title">Première S2 B</div><div class="pcard-school">Sédhiou · 2026</div></div></div>
+            </div>
+            <div class="photo-grid" id="grid-2025" style="display:none;">
                 <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/lynaqe-06.webp" alt="6ème M1A" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">6ème M1A</div><div class="pcard-school">Sédhiou · 2025</div></div></div>
                 <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/lynaqe-07.webp" alt="6ème M1B" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">6ème M1B</div><div class="pcard-school">Sédhiou · 2025</div></div></div>
                 <div class="pcard"><div class="pcard-img" style="background:none;"><img loading="lazy" decoding="async" src="images/lynaqe-08.webp" alt="5ème M1A" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;"></div><div class="pcard-body"><div class="pcard-level">Collège</div><div class="pcard-title">5ème M1A</div><div class="pcard-school">Sédhiou · 2025</div></div></div>
@@ -2442,6 +2485,20 @@
         el.classList.add('active');
     }
 
+    // ── Bascule des promotions 2025 / 2026 ──
+    function setPromoYear(year) {
+        const g25 = document.getElementById('grid-2025');
+        const g26 = document.getElementById('grid-2026');
+        if (!g25 || !g26) return;
+        g25.style.display = (year === '2025') ? '' : 'none';
+        g26.style.display = (year === '2026') ? '' : 'none';
+        const promo = document.getElementById('promoText');
+        if (promo) promo.textContent = 'Promotion ' + year + ' — LYNAQE Sédhiou';
+        document.querySelectorAll('.year-opt').forEach(b =>
+            b.classList.toggle('active', b.getAttribute('data-year') === year)
+        );
+    }
+
     // ── Concours toggle ──
     function toggleConcours(id) {
         const card = document.getElementById('panel-' + id).closest('.concours-card');
@@ -2781,6 +2838,8 @@ const I18N_EN = {
     "Nos Classes en Images": "Our Classes in Pictures",
     "Venez découvrir les promotions de l'année": "Come discover this year's cohorts",
     "Promotion 2025 — LYNAQE Sédhiou": "Class of 2025 — LYNAQE Sédhiou",
+    "Photo à venir": "Photo coming soon",
+    "Promotion 2026 — LYNAQE Sédhiou": "Class of 2026 — LYNAQE Sédhiou",
     "Collège": "Middle School",
     "Lycée": "High School",
 
